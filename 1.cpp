@@ -44,7 +44,7 @@ int menu()
 }
 
 
-// Função para inserção de um novo atleta no array clube
+// FunÃ§Ã£o para inserÃ§Ã£o de um novo atleta no array clube
 // devolvendo como resultado 1 em caso de sucesso e 0 em caso de insucesso
 int inserirV(Mobilidade c[], int qt, int cod, char tipo[], float custo, float at)
 {
@@ -60,6 +60,22 @@ int inserirV(Mobilidade c[], int qt, int cod, char tipo[], float custo, float at
  else return(0);
 }
 
+int inserirP(Pedido utilizacao[],Mobilidade c[],int qt, int num, int NIF, int cod, float tempo, float distancia)
+{
+  if ((qt < TAMANHOPDD) && (existepdd(utilizacao,qt,num)==-1))
+  
+  { 
+    utilizacao[qt].numero = num;
+    utilizacao[qt].NIF = NIF;
+    utilizacao[qt].codigo = cod;
+    utilizacao[0].tempoi = 0;
+    utilizacao[qt].tempo = utilizacao[qt].tempoi + tempo;
+    utilizacao[qt+1].tempoi = utilizacao[qt].tempo;
+    utilizacao[qt].distancia = distancia;
+    return(1);
+  }
+  else return(0);
+}
 
 void listarv(Mobilidade c[], int quantidadeVeiculos)
 {int i;
@@ -122,7 +138,7 @@ int i=0;
      printf("Inserido com sucesso!\n");
      quantidadeVeiculos++;   
       }
-	   else printf("Não inserido!");
+	   else printf("NÃ£o inserido!");
     	break;
   
   case 2:
