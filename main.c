@@ -153,6 +153,7 @@ else{
   //Se for igual 0 tem mesmo nome
 printf("Existe um veiculo do mesmo tipo tem o codigo %i\n", c[i].codigo);
 printf("Com a Autonomia %.2f\n",c[i].autonomia);
+	  printf("\n");
 
   //}
   }}
