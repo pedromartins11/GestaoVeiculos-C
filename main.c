@@ -132,6 +132,7 @@ void custopreco(Pedido utilizacao[], Mobilidade c[],int n, float custo,int cod)
   aut = c[n].autonomiai - c[n].autonomia;
   pre = preco*aut;
   printf("Custo: %.2f\n", pre);
+	printf("\n");
 
 }
 
