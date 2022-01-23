@@ -26,6 +26,13 @@ typedef struct
 }Pedido;
 
 int menu();
+int inserirV(Mobilidade c[], int qt, int cod, char tipo[], float custo, float at);
+int inserirP(Pedido utilizacao[],Mobilidade c[],int qt, int num, int NIF, int cod, float tempo, float distancia);
+int existe(Mobilidade c[], int qt, int cod);
+int existepdd(Pedido utilizacao[], int qt, int cod);
+
+
+
 int menu()
 {int opcao;
  do { printf("\n");
@@ -33,6 +40,7 @@ int menu()
       printf("1 - Inserir Veiculo \n");
       printf("2 - Listar Veiculo\n");
       printf("3 - Remover Veiculo\n"); 
+      printf("4 - Inserir Pedido\n");
       printf("0 - Sair\n");
       printf("\n");
       printf("Opcao?");
@@ -89,6 +97,39 @@ void listarv(Mobilidade c[], int quantidadeVeiculos)
  }
 }
 
+void listarp(Pedido P[], int quantidadeP)
+{int i;
+ for(i=0;i<quantidadeP;i++)
+ {
+  printf("N_Pedido: %d\n",P[i].numero);
+  printf("NIF: %d\n",P[i].NIF);
+  printf("Cod veiculo: %d\n",P[i].codigo);
+  printf("Tempo: %.2f\n",P[i].tempo);
+  printf("Distancia: %.2f\n",P[i].distancia);
+  printf("\n");
+ }
+}
+
+int existe(Mobilidade c[], int qt, int cod)
+{int i=0;
+ while (i<qt)
+ {if (c[i].codigo==cod) return(i);
+  i++;
+ }
+ return(-1);
+}
+
+int existepdd(Pedido utilizacao[], int qt, int cod)
+{int i=0;
+while (i<qt)
+{
+  if(utilizacao[i].codigo==cod) return(i);
+  i++;
+}
+return (-1);
+}
+
+
 int removerVeiculo(Mobilidade c[], int quantidadeVeiculos, int cod)
 {int indice;
  indice = existe(c,quantidadeVeiculos,cod);
@@ -99,6 +140,7 @@ int removerVeiculo(Mobilidade c[], int quantidadeVeiculos, int cod)
   return(1);
   }
 }
+
 
 int main()
 {int resultado, resultadoP, codigo=0, opcao;
@@ -154,11 +196,39 @@ int i=0;
 	}
 	  else printf("Codigo inexestente!");
   break;
+  case 4:
+  num = num+1;
+  tempo=0;
+  printf("Veículos disponíveis:");
+  printf("\n");
+  listarv(c,quantidadeVeiculos);
+  printf("Insira o codigo do veículo:");
+  scanf("%i", &cod);
   
+  if (existe(c,quantidadeVeiculos,cod)!=-1)
+  {
+  printf("NIF?");
+  scanf("%i",&NIF);
+  printf("Tempo(min)?");
+  scanf("%f",&tempo);
+  printf("Distancia(km)?");
+  scanf("%f",&distancia);
+  
+  resultadoP = inserirP(utilizacao,c,quantidadeP,num,NIF,cod, tempo, distancia);
+  r = auton(utilizacao,c,quantidadeVeiculos,distancia,cod);
+  if (resultadoP==1) {
+     printf("Pedido realizado!");
+     quantidadeP++;       
+      }
+      
+	   else{ printf("Nao inserido!\n");
+     }
+     }
+  else printf("Codigo inexistente!\n\n");
+    break;
   }
  }
  while(opcao != 0);
  return(0);
  }
-
 
