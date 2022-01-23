@@ -250,6 +250,7 @@ int removerPedido(Pedido utilizacao[], int qt, int num)
  else 
   {
     utilizacao[indice] = utilizacao[qt-1];
+	 printf("\n");
   return(1);
   }
 }
