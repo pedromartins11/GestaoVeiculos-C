@@ -71,7 +71,7 @@ int menu()
 }
 
 
-// Função para inserção de um novo atleta no array clube
+// FunÃ§Ã£o para inserÃ§Ã£o de um novo atleta no array clube
 // devolvendo como resultado 1 em caso de sucesso e 0 em caso de insucesso
 int inserirV(Mobilidade c[], int qt, int cod, char tipo[], float custo, float at)
 {
@@ -365,7 +365,7 @@ int i=0;
      printf("Inserido com sucesso!\n");
      quantidadeVeiculos++;   
       }
-	   else printf("Não inserido!");
+	   else printf("NÃ£o inserido!");
     	break;
   
   case 2:
@@ -384,10 +384,10 @@ int i=0;
   case 4:
   num = num+1;
   tempo=0;
-  printf("Veículos disponíveis:");
+  printf("VeÃ­culos disponÃ­veis:");
   printf("\n");
   listarv(c,quantidadeVeiculos);
-  printf("Insira o codigo do veículo:");
+  printf("Insira o codigo do veÃ­culo:");
   scanf("%i", &cod);
   
   if (existe(c,quantidadeVeiculos,cod)!=-1)
