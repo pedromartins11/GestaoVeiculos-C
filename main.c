@@ -108,7 +108,7 @@ void consulta(Pedido utilizacao[], Mobilidade c[],int qt,int qtt, int cod, int n
  }
  }
 
-void ordenarN(Pedido utilizacao[], int qt)
+void ordenarN(Pedido utilizacao[], int qt, int cod)
 {int i,j;
  Pedido aux;
  for(i=0;i<qt;i++)
@@ -265,6 +265,7 @@ int lerP(Pedido P[],Mobilidade c[])
   fscanf(fp,"Distancia: %f\n",&distancia);
   fscanf(fp,"\n");
   resultadoP = inserirP(P,c,qt,num,NIF,cod,tempo,distancia);
+  fscanf("\n");
   if (resultadoP==1) qt++;
  }
  fclose(fp);
