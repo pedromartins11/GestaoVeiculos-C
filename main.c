@@ -326,6 +326,7 @@ int main()
  float altura, peso, res;
  float aut;
  float autonomiai;
+ float auton;
  char nome[50];
  float custo;
  char tipo[50];
@@ -458,6 +459,7 @@ int i=0;
      custopreco(utilizacao,c,num,custo,cod);
     else
     printf("Numero inexistente");
+   printf("\n");
     break;
   case 13:
     ordenarN(utilizacao,quantidadeP);
