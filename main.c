@@ -327,7 +327,9 @@ void guardarV(Mobilidade P[], int quantidadeVeiculos)
 }
 
 int main()
-{int resultado, resultadoP, codigo=0, opcao;
+{
+	printf("asfsfsdx");
+	int resultado, resultadoP, codigo=0, opcao;
  float altura, peso, res;
  float aut;
  float autonomiai;
