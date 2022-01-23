@@ -285,6 +285,7 @@ void guardarP(Pedido P[], int quantidadeP)
   fprintf(fp,"Tempo: %.2f\n",P[i].tempo);
   fprintf(fp,"Distancia: %.2f\n",P[i].distancia);
   fprintf(fp,"\n");
+  printf("gdf");
  }
  fclose(fp);
 }
