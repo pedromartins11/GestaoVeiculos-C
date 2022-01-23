@@ -339,6 +339,7 @@ int num = 0,r;
 float precoo;
 int cod;
 int cd;
+ int fsdf;
 int i=0;
 
  do
