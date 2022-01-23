@@ -26,28 +26,16 @@ typedef struct
 }Pedido;
 
 int menu();
-int inserirV(Mobilidade c[], int qt, int cod, char tipo[], float custo, float at);
-int inserirP(Pedido utilizacao[],Mobilidade c[],int qt, int num, int NIF, int cod, float tempo, float distancia);
-int existe(Mobilidade c[], int qt, int cod);
-int existepdd(Pedido utilizacao[], int qt, int cod);
-int existe2(Pedido utilizacao[], int qt, int num);
-int removerVeiculo(Mobilidade c[], int quantidadeVeiculos, int cod);
-int removerPedido(Pedido utilizacao[], int qt, int num);
-int lerP(Pedido P[],Mobilidade c[]);
-int auton(Pedido utilizacao[], Mobilidade c[],int qt, float distancia, int cod);
+int existe(Mobilidade c[], int qt , int cod);
+int existepdd(Pedido utilizacao[], int qt , int cod);
+int inserirV(Mobilidade c[], int qt, int cod, char tipo[], float custo, float aut);
+int inserirP(Pedido utilizacao[],Mobilidade c[], int qt, int num, int NIF, int cod, float tempo, float distancia);
+int lerP(Pedido utilizacao[],Mobilidade c[]);
 int lerV(Mobilidade c[]);
-void consulta(Pedido utilizacao[], Mobilidade c[],int qt,int qtt, int cod, int num, int NIF, float autonomiai);
-void ordenarN(Pedido utilizacao[], int qt);
-void custopreco(Pedido utilizacao[], Mobilidade c[],int n, float custo,int cod);
-void listarv(Mobilidade c[], int quantidadeVeiculos);
-void listarp(Pedido P[], int quantidadeP);
-void guardarP(Pedido P[], int quantidadeP);
-void guardarV(Mobilidade P[], int quantidadeVeiculos);
 
 int menu()
 {int opcao;
- do { printf("\n");
-      printf("M E N U\n");
+ do { printf("M E N U\n");
       printf("1 - Inserir Veiculo \n");
       printf("2 - Listar Veiculo\n");
       printf("3 - Remover Veiculo\n"); 
@@ -60,11 +48,10 @@ int menu()
       printf("10 - Ler pedidos\n");
       printf("11 - Consultar veiculo\n");
       printf("12 - Custo do pedido\n");
+      printf("13 - Ordenar pelo N_ordem\n");
       printf("0 - Sair\n");
-      printf("\n");
       printf("Opcao?");
       scanf("%d",&opcao);
-      
     } 
  while ((opcao<0)||(opcao>20));
  return(opcao);
@@ -95,9 +82,8 @@ int inserirP(Pedido utilizacao[],Mobilidade c[],int qt, int num, int NIF, int co
     utilizacao[qt].numero = num;
     utilizacao[qt].NIF = NIF;
     utilizacao[qt].codigo = cod;
-    utilizacao[0].tempoi = 0;
-    utilizacao[qt].tempo = utilizacao[qt].tempoi + tempo;
-    utilizacao[qt+1].tempoi = utilizacao[qt].tempo;
+    utilizacao[qt].tempo = tempo;
+    utilizacao[qt].tempoi = tempo;
     utilizacao[qt].distancia = distancia;
     return(1);
   }
@@ -116,7 +102,7 @@ void consulta(Pedido utilizacao[], Mobilidade c[],int qt,int qtt, int cod, int n
   printf("Tempo Inicio: %.2f\n", utilizacao[i].tempoi);
   printf("Tempo Termino: %.2f\n", utilizacao[i].tempo);
   printf("Codigo do veiculo: %d\n", utilizacao[i].codigo);
-  printf("Autonomia Inicial: %.2f\n", utilizacao[cod].distanciai);
+  printf("Autonomia: %.2f\n", utilizacao[cod].distanciai);
   printf("\n");
   }
  }
@@ -133,6 +119,7 @@ void ordenarN(Pedido utilizacao[], int qt)
 	    memcpy(&utilizacao[j],&aux,sizeof(Pedido));
 	   }
 }
+
 
 void custopreco(Pedido utilizacao[], Mobilidade c[],int n, float custo,int cod)
 {
@@ -158,13 +145,18 @@ int i=0;
 }
 else{ 
   for (i=cod+1;i<qt;i++){
+  //for (i=cod+1;i>=0;i--){
   if(c[i].autonomia >= distancia)
   if(strcmp(c[cod].tipo,c[i].tipo) == 0 ){
   //Se for igual 0 tem mesmo nome
 printf("Existe um veiculo do mesmo tipo tem o codigo %i\n", c[i].codigo);
 printf("Com a Autonomia %.2f\n",c[i].autonomia);
 
+  //}
   }}
+
+
+  //
   for (i=cod+1;i>=0;i--){
   if(c[i].autonomia >= distancia)
   if(strcmp(c[cod].tipo,c[i].tipo) == 0 ){
@@ -189,6 +181,7 @@ void listarv(Mobilidade c[], int quantidadeVeiculos)
   printf("Tipo: %s\n",c[i].tipo);
   printf("Custo: %.2f\n",c[i].custo);
   printf("Autonomia %.2f\n",c[i].autonomia);
+  printf("Autonomia Inicial %.2f\n",c[i].autonomiai);
   printf("\n");
  }
 }
@@ -346,6 +339,7 @@ int num = 0,r;
 float precoo;
 int cod;
 int cd;
+ int fsdf;
 int i=0;
 
  do
@@ -362,7 +356,8 @@ int i=0;
   utilizacao[codigo-1].distanciai = aut;
   resultado = inserirV(c,quantidadeVeiculos,codigo,tipo,custo,aut);
    if (resultado==1) {
-     printf("Inserido com sucesso!\n");
+     printf("Inserido com sucesso!");
+     printf("\n");
      quantidadeVeiculos++;   
       }
 	   else printf("Não inserido!");
@@ -377,13 +372,12 @@ int i=0;
 	res = removerVeiculo(c,quantidadeVeiculos,codigo);
   if (res==1){
   quantidadeVeiculos--;
-  printf("Removido com sucesso!\n");
+  printf("Removido com sucesso!");
 	}
 	  else printf("Codigo inexestente!");
   break;
   case 4:
   num = num+1;
-  tempo=0;
   printf("Veículos disponíveis:");
   printf("\n");
   listarv(c,quantidadeVeiculos);
@@ -403,7 +397,8 @@ int i=0;
   r = auton(utilizacao,c,quantidadeVeiculos,distancia,cod);
   if (resultadoP==1 && r >= 0) {
      printf("Pedido realizado!");
-     quantidadeP++;       
+     quantidadeP++;  
+             
       }
       
 	   else{ printf("Nao inserido!\n");
@@ -444,7 +439,6 @@ int i=0;
     
     if (existe(c,quantidadeVeiculos,cod)!=-1)
     {
-      ordenarN(utilizacao,quantidadeP);
       consulta(utilizacao,c,quantidadeP,quantidadeVeiculos,cod,num, NIF, autonomiai);
     }
     else
@@ -464,10 +458,15 @@ int i=0;
     else
     printf("Numero inexistente");
     break;
+  case 13:
+    ordenarN(utilizacao,quantidadeP);
+   
+    listarp(utilizacao,quantidadeP);
+  break;
+    
   }
  }
  while(opcao != 0);
  return(0);
  }
-
 
