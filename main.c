@@ -459,6 +459,7 @@ int i=0;
     break;
   case 13:
     ordenarN(utilizacao,quantidadeP);
+   
     listarp(utilizacao,quantidadeP);
   break;
     
