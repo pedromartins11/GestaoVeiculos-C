@@ -12,7 +12,7 @@ char tipo[50];
 float custo;
 float autonomia;
 float autonomiai;
-	int fdggfd;
+	
 }Mobilidade;
 
 typedef struct
